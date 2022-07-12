@@ -1,0 +1,15 @@
+form {
+    display: flex;
+}
+
+
+
+#searchMovies {
+    border: none;
+    width: 100%;
+}
+
+.searchButton {
+    background: transparent;
+    border: none;
+}

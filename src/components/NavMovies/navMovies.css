@@ -1,0 +1,15 @@
+.navMovies-link {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 25px auto;
+    padding: 5px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
+.navMovies-link>* {
+    margin: 0 20px;
+}

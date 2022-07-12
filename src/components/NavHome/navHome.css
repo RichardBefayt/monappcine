@@ -1,0 +1,19 @@
+.navHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 800px;
+    margin: 50px auto;
+}
+
+.navHome-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}

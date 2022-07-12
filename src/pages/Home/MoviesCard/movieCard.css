@@ -1,0 +1,90 @@
+.movieCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    padding: 10px 5px 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
+.movieCard>* {
+    margin-top: 13px;
+}
+
+img {
+    display: block;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 25px;
+    box-shadow: 0 8px 1px rgba(255, 255, 255, 0.1),
+        0 16px 1px rgba(255, 255, 255, 0.05);
+}
+
+.movieCard-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    width: 35%;
+    border-radius: 25px;
+}
+
+.btn {
+    position: relative;    
+    border: 0.5px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    -webkit-transition-duration: 0.4s; /* Safari */
+}
+
+.btn:after {
+    content: "";
+    background: #fff;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.reservation {
+    background-color: #fff;
+}
+
+.reservation:hover {
+    background: #000;
+    box-shadow: 0px 2px 10px 5px #97B1BF;
+    color: #fff;
+}
+
+.moreInfo {
+    background-color: #f39c12;
+}
+
+.moreInfo:hover {
+    background: #fff;
+    box-shadow: 0px 2px 10px 5px #97B1BF;
+    color: #000;
+}

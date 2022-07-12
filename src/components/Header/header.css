@@ -1,0 +1,12 @@
+.header {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.header-title {
+    flex: 0.7;
+    font-size: 2rem;
+}
