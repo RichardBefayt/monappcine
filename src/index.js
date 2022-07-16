@@ -17,3 +17,5 @@ root.render(
         </Provider>
     </BrowserRouter>
 );
+
+// Penser à installer sur le client les dépendances front (react-router-dom...)
