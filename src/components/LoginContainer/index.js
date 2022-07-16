@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { login, logout, setUserField } from '../../actions/user';
+import { login, logout, setUserField } from '../../actions/users';
 
-import LoginForm from '../LoginForm';
+import Login from '../Login';
 
-const LoginFormContainer = () => {
+const LoginContainer = () => {
     const dispatch = useDispatch();
 
     const logged = useSelector((state) => state.users.logged);
@@ -13,7 +13,7 @@ const LoginFormContainer = () => {
 
     const message = pseudo ? `Connecté en tant que ${pseudo}` : '';
 
-    // On prépare une fonction qui va permettre de gérer les changement d'un champ
+    // On prépare une fonction qui va permettre de gérer les changements d'un champ
     const changeField = (value, name) => {
         // console.log(`il faut changer la valeur du champ ${name} avec : ${value}`);
         dispatch(setUserField(value, name));
@@ -32,7 +32,7 @@ const LoginFormContainer = () => {
     };
 
     return (
-        <LoginForm
+        <Login
             email={email}
             password={password}
             changeField={changeField}
@@ -43,4 +43,4 @@ const LoginFormContainer = () => {
         />
     );
 };
-export default LoginFormContainer;
+export default LoginContainer;

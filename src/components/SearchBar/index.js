@@ -6,6 +6,7 @@ import { setCurrentSearch } from "../../actions/movies";
 import './searchBar.css';
 
 const SearchBar = () => {
+
     const currentSearch = useSelector((state) => state.movies.currentSearch);
 
     const dispatch = useDispatch();
@@ -26,8 +27,11 @@ const SearchBar = () => {
                     onChange={handleChange}
                     value={currentSearch}
                 />
-                <button className="searchButton">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                <button 
+                    type="submit"
+                    className="searchButton"
+                >
+                        <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
         </div>

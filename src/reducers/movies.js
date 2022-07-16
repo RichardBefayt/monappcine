@@ -21,7 +21,6 @@ const moviesReducer = (state = initialState, action = {}) => {
                 currentSearch: action.value,
             }
 
-
         default:
             return state;
     }

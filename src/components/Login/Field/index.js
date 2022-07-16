@@ -23,14 +23,15 @@ const Field = ({
                 id={inputId}
                 type={type}
                 className="field-input"
+                placeholder={placeholder}
                 name={name}
             />
 
             <label
                 htmlFor={inputId}
                 className="field-label"
+                placeholder={placeholder}
             >
-                {placeholder}
             </label>
         </div>
     );
