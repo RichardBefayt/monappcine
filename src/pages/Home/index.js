@@ -10,10 +10,7 @@ import MovieCard from './MoviesCard';
 import './home.css';
 
 const Home = () => {
-    // const movies = useSelector((state) => state.movies.moviesData);
-    
     const movies = useSelector((state) => state.movies.movies);
-    // const [search, setSearch] = useState("");
 
     const dispatch = useDispatch();
     useEffect(

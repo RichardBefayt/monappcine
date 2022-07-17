@@ -1,10 +1,11 @@
-import { SAVE_MOVIES, SET_CURRENT_SEARCH } from "../actions/movies.js";
+import { SAVE_MOVIES, SAVE_SEARCH, SET_CURRENT_SEARCH } from "../actions/movies.js";
 
 // import moviesData from "../data/movies";
 
 export const initialState = {
     movies: [],
     currentSearch: "",
+    saveSearch: []
 };
 
 const moviesReducer = (state = initialState, action = {}) => {
@@ -19,6 +20,12 @@ const moviesReducer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 currentSearch: action.value,
+            }
+
+        case SAVE_SEARCH:
+            return {
+                ...state,
+                saveSearch: action.search,
             }
 
         default:

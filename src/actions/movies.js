@@ -12,3 +12,11 @@ export const setCurrentSearch = (currentSearch) => ({
     type: SET_CURRENT_SEARCH,
     value: currentSearch,
 });
+
+export const SAVE_SEARCH = 'SAVE_SEARCH';
+export const saveSearch = (search) => (
+  {
+    type: SAVE_SEARCH,
+    search,
+  }
+);
