@@ -1,5 +1,5 @@
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { useFocus } from "../../hooks/useFocus";
 
 import { setCurrentSearch } from "../../actions/movies";
 
@@ -10,11 +10,18 @@ const SearchBar = () => {
     const currentSearch = useSelector((state) => state.movies.currentSearch);
 
     const dispatch = useDispatch();
+
     function handleChange(event) {
         dispatch(setCurrentSearch(event.target.value));
     }
 
-    const inputRef = useFocus();
+    const inputRef = useRef();
+    useEffect(
+        () => {
+            inputRef.current.focus();
+        },
+        [],
+    );
 
     return (
         <div className='searchBar'>

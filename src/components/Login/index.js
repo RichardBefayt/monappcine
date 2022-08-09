@@ -1,80 +1,38 @@
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
 
-import Field from './Field';
+import "./login.css";
 
-import './login.css';
+const Settings = () => {
+    const dispatch = useDispatch();
 
-const Login = ({
-    email,
-    password,
-    changeField,
-    handleLogin,
-    handleLogout,
-    isLogged,
-    loggedMessage,
-}) => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        handleLogin();
-    };
+    const email = useSelector((state) => state.email);
+    const password = useSelector((state) => state.password);
 
     return (
         <div className="login">
-            {isLogged && (
-                <div className="login-logged">
-                    <p className="login-message">
-                        {loggedMessage}
-                    </p>
-                    <button
-                        type="button"
-                        className="login-button"
-                        onClick={handleLogout}
-                    >
-                        Déconnexion
-                    </button>
-                </div>
-            )}
-
-            {!isLogged && (
-                <form autoComplete="off" className="login-element" onSubmit={handleSubmit}>
-                    <Field
-                        name="email"
-                        placeholder="Adresse Email"
-                        onChange={changeField}
-                        value={email}
-                    />
-                    <Field
-                        name="password"
-                        type="password"
-                        placeholder="Mot de passe"
-                        onChange={changeField}
-                        value={password}
-                    />
-                    <button
-                        type="submit"
-                        className="login-button"
-                    >
-                        OK
-                    </button>
-                </form>
-            )}
+            <form className="login-form">
+                <input
+                    className="input input-email"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(event) => dispatch({ type: "SET_EMAIL", value: event.target.value })}
+                />
+                
+                <input
+                    className="input input-password"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(event) => dispatch({ type: "SET_PASSWORD", value: event.target.value })}
+                />
+                
+                <button className="login-submit" type="submit">
+                    Se connecter
+                </button>
+            </form>
         </div>
     );
 };
 
-Login.propTypes = {
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    changeField: PropTypes.func.isRequired,
-    handleLogin: PropTypes.func.isRequired,
-    handleLogout: PropTypes.func.isRequired,
-    isLogged: PropTypes.bool,
-    loggedMessage: PropTypes.string,
-};
-
-Login.defaultProps = {
-    isLogged: false,
-    loggedMessage: 'Connecté',
-};
-
-export default Login;
+export default Settings;

@@ -5,7 +5,7 @@ import { SAVE_MOVIES, SAVE_SEARCH, SET_CURRENT_SEARCH } from "../actions/movies.
 export const initialState = {
     movies: [],
     currentSearch: "",
-    saveSearch: []
+    saveSearch: [],
 };
 
 const moviesReducer = (state = initialState, action = {}) => {

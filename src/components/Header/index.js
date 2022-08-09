@@ -1,10 +1,10 @@
-import LoginContainer from '../LoginContainer';
+import Login from '../Login';
 import './header.css';
 
 const Header = () => (
     <header className='header'>
         <h1 className='header-title'>Mon Appli Ciné</h1>
-        <LoginContainer />
+        <Login />
     </header>
 );
 
