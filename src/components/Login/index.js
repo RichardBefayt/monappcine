@@ -1,3 +1,5 @@
+// Faire un bouton "connexion/inscription" qui mène sur page formulaire de l'un ou de l'autre.
+
 import { useSelector, useDispatch } from "react-redux";
 
 import "./login.css";

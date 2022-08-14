@@ -3,7 +3,9 @@ import axios from "axios";
 import { FETCH_MOVIES, saveMovies, saveSearch, SET_CURRENT_SEARCH } from '../actions/movies';
 import { LOGIN, connectUser } from "../actions/users";
 
-const API_URL = "https://api.themoviedb.org/3"
+const API_URL = "https://api.themoviedb.org/3";
+
+
 
 const apiMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
@@ -19,17 +21,26 @@ const apiMiddleware = (store) => (next) => (action) => {
             next(action);
             break;
 
-        case SET_CURRENT_SEARCH:
+        case SET_CURRENT_SEARCH: {
+            const state = store.getState();
+            const { currentSearch } = state.currentSearch || "";
+            console.log("currentSearch :", currentSearch);
             axios
             .get(
-                `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false`
+                `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&${currentSearch}`
             )
             .then(
-                (response) => store.dispatch(saveSearch(response.data.results))
-            );
+                (response) => 
+                console.log("response", response.data.results)
+                // store.dispatch(saveSearch(response.data.results))
+            )
+            .catch(error => {
+                console.error("response", error.response.data)
+            });
 
             next(action);
             break;
+        }
         
         case LOGIN:
             const state = store.getState();
