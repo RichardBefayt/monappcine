@@ -1,3 +1,5 @@
+// J'ai finalement opté pour plus simple en passant directement par useState pour l'affichage et la recherche de films
+
 import { SAVE_MOVIES, SAVE_SEARCH, SET_CURRENT_SEARCH } from "../actions/movies.js";
 
 // import moviesData from "../data/movies";

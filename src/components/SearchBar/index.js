@@ -1,18 +1,27 @@
-import { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-
-import { setCurrentSearch } from "../../actions/movies";
+import { useEffect, useRef, useState } from "react";
 
 import './searchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({ movies }) => {
 
-    const currentSearch = useSelector((state) => state.movies.currentSearch);
+    const API_URL = "https://api.themoviedb.org/3";
+    const API_SEARCH = `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query`
 
-    const dispatch = useDispatch();
+    const [ query, setQuery ] = useState("");
 
-    function handleChange(event) {
-        dispatch(setCurrentSearch(event.target.value));
+    const searchMovie = async (event) => {
+        event.preventDefault();
+        console.log("Searching");
+        try {
+            const url = `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query=${query}`;
+
+            const response = await fetch(url);
+            const data = JSON.parse(response.json);
+            console.log("data :", data);
+            // setMovies
+        } catch (error) {
+            
+        }
     }
 
     const inputRef = useRef();
@@ -25,14 +34,13 @@ const SearchBar = () => {
 
     return (
         <div className='searchBar'>
-            <form>
+            <form onSubmit={searchMovie}>
                 <input
                     type="text"
                     id="searchMovies"
                     ref={inputRef}
                     placeholder="Nom du film recherché"
-                    onChange={handleChange}
-                    value={currentSearch}
+                    value=""
                 />
                 <button 
                     type="submit"

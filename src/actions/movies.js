@@ -1,3 +1,5 @@
+// J'ai finalement opté pour plus simple en passant directement par useState pour l'affichage et la recherche de films
+
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const fetchMovies = () => ({ type: FETCH_MOVIES });
 

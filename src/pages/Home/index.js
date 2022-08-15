@@ -1,29 +1,48 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
-import { fetchMovies } from '../../actions/movies';
 
-import NavHome from '../../components/NavHome';
+import NavMovies from '../../components/NavMovies';
 import MovieCard from './MoviesCard';
 
 import './home.css';
 
 const Home = () => {
-    const movies = useSelector((state) => state.movies.movies);
+    const API_BASE_URL = "https://api.themoviedb.org/3";
 
-    const dispatch = useDispatch();
+    const API_URL = `${API_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR`;
+
+    const [ movies, setMovies ] = useState([]);
+
     useEffect(
         () => {
-            dispatch(fetchMovies());
+            fetch(API_URL)
+            .then((response) => response.json())
+            .then(data => {
+                console.log("data :", data);
+                setMovies(data.results);
+            })
         }, 
         [],
     );
 
     return (
         <div className='home'>
-            <NavHome />
-            <div className='moviesCard-container'>
+            <div className='nav-home'>
+                <ul className='nav-home-link'>
+                    <Link to='/home'>Accueil</Link>
+                    <Link to='/boutique'>Boutique</Link>
+                    <Link to='/contact'>Contact</Link>
+                </ul>
+            </div>
+
+            <NavMovies
+                movies={movies}
+                setMovies={setMovies}
+            />
+            
+            <div className='movies-card-container'>
                 {
                     movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
                 }
