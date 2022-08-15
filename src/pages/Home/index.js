@@ -2,8 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
-
-import NavMovies from '../../components/NavMovies';
 import MovieCard from './MoviesCard';
 
 import './home.css';
@@ -14,13 +12,33 @@ const Home = () => {
     const API_URL = `${API_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR`;
 
     const [ movies, setMovies ] = useState([]);
+    const [ query, setQuery ] = useState("");
 
+    const searchMovie = async (event) => {
+        event.preventDefault();
+        console.log("Searching");
+        try {
+            const url = `${API_BASE_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query=${query}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            setMovies(data.results);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+    }
+
+    
     useEffect(
         () => {
             fetch(API_URL)
             .then((response) => response.json())
             .then(data => {
-                console.log("data :", data);
+                console.log("data useEffect :", data);
                 setMovies(data.results);
             })
         }, 
@@ -37,10 +55,30 @@ const Home = () => {
                 </ul>
             </div>
 
-            <NavMovies
-                movies={movies}
-                setMovies={setMovies}
-            />
+            <div className='nav-movies'>
+                <ul className='nav-movies-link'>
+                    <Link to='/affiche'>A l'affiche</Link>
+                    <Link to='/prochainement'>Prochainement</Link>
+
+                    <div className='search-bar'>
+                        <form onSubmit={searchMovie}>
+                            <input
+                                type="text"
+                                id="search-movies"
+                                placeholder="Nom du film recherché"
+                                value={query}
+                                onChange={handleChange}
+                            />
+                            <button 
+                                type="submit"
+                                className="search-button"
+                            >
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                </ul>
+                </div>
             
             <div className='movies-card-container'>
                 {

@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import SearchBar from '../SearchBar';
-
-import './navMovies.css';
+import './nav-movies.css';
 
 const NavMovies = ({ movies, setMovies }) => {
     const API_URL = "https://api.themoviedb.org/3";
-    const API_SEARCH = `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query`
+    const API_SEARCH = `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query`;
 
     const [ query, setQuery ] = useState("");
 
@@ -16,14 +14,17 @@ const NavMovies = ({ movies, setMovies }) => {
         console.log("Searching");
         try {
             const url = `${API_URL}/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR&page=1&include_adult=false&query=${query}`;
-
             const response = await fetch(url);
             const data = JSON.parse(response.json);
             console.log("data :", data);
-            // setMovies
+            setMovies(data.results);
         } catch (error) {
-            
+            console.error(error);
         }
+    }
+
+    const handleChange = (event) => {
+        setQuery(event.target.value);
     }
 
     const inputRef = useRef();
@@ -34,23 +35,24 @@ const NavMovies = ({ movies, setMovies }) => {
         [],
     );
     return (
-        <div className='navMovies'>
-            <ul className='navMovies-link'>
+        <div className='nav-movies'>
+            <ul className='nav-movies-link'>
                 <Link to='/affiche'>A l'affiche</Link>
                 <Link to='/prochainement'>Prochainement</Link>
 
-                <div className='searchBar'>
+                <div className='search-bar'>
                     <form onSubmit={searchMovie}>
                         <input
                             type="text"
-                            id="searchMovies"
+                            id="search-movies"
                             ref={inputRef}
                             placeholder="Nom du film recherché"
                             value={query}
+                            onChange={handleChange}
                         />
                         <button 
                             type="submit"
-                            className="searchButton"
+                            className="search-button"
                         >
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </button>
