@@ -25,6 +25,7 @@ const Home = () => {
             setMovies(data.results);
         } catch (error) {
             console.error(error);
+            setMovies("Aucun film ne correspond à votre recherche");
         }
     }
 
@@ -48,10 +49,21 @@ const Home = () => {
     return (
         <div className='home'>
             <div className='nav-home'>
-                <ul className='nav-home-link'>
-                    <Link to='/home'>Accueil</Link>
-                    <Link to='/boutique'>Boutique</Link>
-                    <Link to='/contact'>Contact</Link>
+                <ul className='nav-home-container'>
+                    <Link to='/' className="nav-home-link">
+                        <i className="fa-solid fa-film"></i>
+                        <p className="nav-home-text">Accueil</p>
+                    </Link>
+                    
+                    <Link to='/boutique' className="nav-home-link">
+                        <i className="fa-solid fa-shop"></i>
+                        <p className="nav-home-text">Boutique</p>
+                    </Link>
+                    
+                    <Link to='/contact' className="nav-home-link">
+                        <i className="fa-solid fa-address-card"></i>
+                        <p className="nav-home-text">Contact</p>
+                    </Link>
                 </ul>
             </div>
 
