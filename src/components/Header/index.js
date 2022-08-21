@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import Login from '../Login';
+import LoginContainer from "../LoginContainer";
 
 import './header.css';
 
@@ -13,7 +13,7 @@ const Header = () => (
             <h1 className='header-title'>Mon Appli Ciné</h1>
         </Link>
 
-        <Login />
+        <LoginContainer />
     </header>
 );
 
