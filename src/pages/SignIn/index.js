@@ -4,7 +4,7 @@ const SignIn = () => {
     
     return (
         <div className='sign-in'>
-            Connexion        
+            Connexion
         </div>
     );
 }
