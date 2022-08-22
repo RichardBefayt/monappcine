@@ -4,7 +4,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background: rgb(248, 217, 15);
-    background: linear-gradient(171deg, rgba(248, 217, 15, 1) 0%, rgb(245, 147, 35) 100%); */
     background: url(../../assets/img/bg.jpg) no-repeat center/cover;
 }
