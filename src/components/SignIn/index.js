@@ -1,6 +1,6 @@
 import './sign-in.css';
 
-const SignIn = () => {
+const SignIn = ({ closeSignInModal }) => {
     
     return (
         <div className='sign-in'>
