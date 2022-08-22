@@ -25,7 +25,6 @@ const Home = () => {
             setMovies(data.results);
         } catch (error) {
             console.error(error);
-            // setMovies("Aucun film ne correspond à votre recherche");
         }
     }
 
