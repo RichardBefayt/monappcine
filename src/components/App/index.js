@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 // Composants
-import Header from "../Header";
+import AppHeader from "../AppHeader";
 import Footer from "../Footer";
 
 // Pages
@@ -17,7 +17,7 @@ import './app.css';
 
 const App = () => (
     <div className='app'>
-        <Header />
+        <AppHeader />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/film" element={<CardItem />} />

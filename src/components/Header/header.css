@@ -1,16 +1,12 @@
 .header {
-    position: relative;
-    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
 .header-link {
     display: flex;
     align-items: center;
-    flex: 0.53;
 }
 
 .header-img {
