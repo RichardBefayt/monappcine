@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
 
 import MovieCard from './MoviesCard';
 
 import './home.css';
 
 const Home = () => {
+    const { currentUser } = useContext(UserContext);
     const API_BASE_URL = "https://api.themoviedb.org/3";
 
     const API_URL = `${API_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_KEY}&language=fr-FR`;
@@ -47,6 +50,11 @@ const Home = () => {
 
     return (
         <div className='home'>
+            <div className="home-welcome">
+                <h1 className="home-welcome">
+                    {currentUser ? "Bienvenue à toi !" : "Bienvenue ! Inscrivez-vous ou Connectez-vous !"}
+                </h1>
+            </div>
             <div className='nav-home'>
                 <ul className='nav-home-container'>
                     <Link to='/' className="nav-home-link">

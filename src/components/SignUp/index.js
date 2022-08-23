@@ -1,12 +1,16 @@
 import { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/userContext.js";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './sign-up.css';
 
 const SignUp = () => {
-    const { modalState, toggleModals } = useContext(UserContext);
+    const { modalState, toggleModals, signUp } = useContext(UserContext);
     // console.log("modalState:", modalState, 'toggleModals:', toggleModals);
+
+    // console.log('signUp:', signUp);
+
+    const navigate = useNavigate();
 
     const [validation, setValidation] = useState("");
 
@@ -20,7 +24,9 @@ const SignUp = () => {
         }
     }
 
-    const handleSubmit = (event) => {
+    const formRef = useRef();
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         // console.log("inputs :", inputs);
 
@@ -36,6 +42,37 @@ const SignUp = () => {
             return;
         }
 
+        // Inscription
+        try {
+            const cred = await signUp(
+                inputs.current[1].value, 
+                inputs.current[2].value
+                )
+
+            formRef.current.reset();
+            setValidation("");
+
+            toggleModals("close");
+
+            navigate("/prive/prive-accueil");
+
+        } catch (error) {
+            console.log("error :", error); 
+            // => Permet de voir l'objet retourné dans lequel on a la propriété code, indiquant le type d'erreur.
+            if(error.code === "auth/invalid-email") {
+                setValidation("Format d'email invalide");
+            }
+
+            if(error.code === "auth/email-already-in-use") {
+                setValidation("Email déjà utilisé");
+            }
+        }
+
+    }
+
+    const closeModal = () => {
+        setValidation("");
+        toggleModals("close");
     }
 
     return (
@@ -44,14 +81,18 @@ const SignUp = () => {
         <div className='sign-up'>
             <div className="sign-up-container">
                 <div className="sign-up-close">
-                    <button onClick={() => toggleModals("close")}>X</button>
+                    <button onClick={closeModal}>X</button>
                 </div>
             
                 <div className="sign-up-title">
                     <h2>Inscription</h2>
                 </div>
 
-                <form className='sign-up-form' onSubmit={handleSubmit}>
+                <form
+                    className='sign-up-form'
+                    onSubmit={handleSubmit}
+                    ref={formRef}
+                >
                     <div className='sign-up-body'>
                         <div className="form-section">
                             <label htmlFor="signUpFirstName" className="form-label">Prénom ou Pseudo</label>
@@ -106,7 +147,7 @@ const SignUp = () => {
                     </div>
                     
                     <div className="sign-up-footer">
-                        <button id="cancel-button" onClick={() => toggleModals("close")}>Annuler</button>
+                        <button id="cancel-button" onClick={closeModal}>Annuler</button>
                         <button>Confirmer</button>
                     </div>
                 </form>

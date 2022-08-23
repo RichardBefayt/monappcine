@@ -6,6 +6,8 @@ import Footer from "../Footer";
 
 // Pages
 import Home from "../../pages/Home";
+import Private from "../../pages/Private";
+import PrivateHome from "../../pages/Private/PrivateHome";
 import CardItem from "../../pages/CardItem";
 import Shop from "../../pages/Shop";
 import ShopCard from "../../pages/Shop/ShopCard";
@@ -20,6 +22,11 @@ const App = () => (
         <AppHeader />
         <Routes>
             <Route path="/" element={<Home />} />
+
+            <Route path="/prive" element={<Private />}>
+				<Route path="/prive/prive-accueil" element={<PrivateHome />} />
+			</Route>
+
             <Route path="/film" element={<CardItem />} />
 
 
