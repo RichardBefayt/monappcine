@@ -1,16 +1,35 @@
-
+import { useContext, useRef, useState } from "react";
+import { UserContext } from "../../context/userContext.js";
+// import { useNavigate } from "react-router-dom";
 
 import './sign-up.css';
 
-const SignUp = ({ closeSignUpModal }) => {
+const SignUp = () => {
+    const { modalState, toggleModals } = useContext(UserContext);
+    // console.log("modalState:", modalState, 'toggleModals:', toggleModals);
 
-    
-    
+    const inputs = useRef([]);
+
+    const addInputs = (element) => {
+        // Si l'élément existe et qu'il n'est pas déjà dans mon tableau
+        if (element && !inputs.current.includes(element)) {
+            // Alors je l'ajoute
+            inputs.current.push(element);
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log("inputs :", inputs);
+    }
+
     return (
+        <>
+        {modalState.signUpModal && (
         <div className='sign-up'>
             <div className="sign-up-container">
                 <div className="sign-up-close">
-                    <button onClick={() => closeSignUpModal(false)}>X</button>
+                    <button onClick={() => toggleModals("close")}>X</button>
                 </div>
             
                 <div className="sign-up-title">
@@ -18,13 +37,25 @@ const SignUp = ({ closeSignUpModal }) => {
                 </div>
 
                 <div className='sign-up-body'>
-                    <form className='sign-up-form'>
+                    <form className='sign-up-form' onSubmit={handleSubmit}>
                         <div className="form-section">
-                            <label htmlFor="signUpEmail" className="form-label">Adresse Mail</label>
+                            <label htmlFor="signUpFirstName" className="form-label">Prénom ou Pseudo</label>
+                            <input 
+                                className="form-control"
+                                id="signUpFirstName"
+                                ref={addInputs}
+                                type="text"
+                                name="name"
+                                required
+                            />
+                        </div>
+                        
+                        <div className="form-section">
+                            <label htmlFor="signUpEmail" className="form-label">Email</label>
                             <input 
                                 className="form-control"
                                 id="signUpEmail"
-                                // ref={addInputs}
+                                ref={addInputs}
                                 type="email"
                                 name="email"
                                 required
@@ -36,7 +67,7 @@ const SignUp = ({ closeSignUpModal }) => {
                             <input 
                                 className="form-control"
                                 id="signUpPwd"
-                                // ref={addInputs}
+                                ref={addInputs}
                                 type="password"
                                 name="pwd"
                                 required
@@ -44,26 +75,28 @@ const SignUp = ({ closeSignUpModal }) => {
                         </div>
 
                         <div className="form-section">
-                            <label htmlFor="repeatPwd" className="form-label">Repeat Password</label>
+                            <label htmlFor="repeatPwd" className="form-label">Confirmer le mot de passe</label>
                             <input
                                 className="form-control"
                                 id="repeatPwd"
-                                // ref={addInputs}
+                                ref={addInputs}
                                 type="password"
                                 name="pwd"
                                 required
                             />
                             {/* <p className="text-danger mt-1">{validation}</p> */}
                         </div>
-                    </form>
-                </div>
 
-                <div className="sign-up-footer">
-                    <button id="cancel-button" onClick={() => closeSignUpModal(false)}>Annuler</button>
-                    <button>Confirmer</button>
+                        <div className="sign-up-footer">
+                            <button id="cancel-button" onClick={() => toggleModals("close")}>Annuler</button>
+                            <button>Confirmer</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        )}
+        </>
     );
 }
 
