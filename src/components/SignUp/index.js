@@ -8,6 +8,8 @@ const SignUp = () => {
     const { modalState, toggleModals } = useContext(UserContext);
     // console.log("modalState:", modalState, 'toggleModals:', toggleModals);
 
+    const [validation, setValidation] = useState("");
+
     const inputs = useRef([]);
 
     const addInputs = (element) => {
@@ -20,7 +22,20 @@ const SignUp = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("inputs :", inputs);
+        // console.log("inputs :", inputs);
+
+        // Validation côté client
+        // Longueur de la valeur de nos inputs
+        // 1. Mots de passe
+        if ((inputs.current[2].value.length || inputs.current[3].value.length) < 6) {
+            setValidation("6 caractères minimum");
+            return;
+
+        } else if (inputs.current[2].value !== inputs.current[3].value) {
+            setValidation("Les 2 mots de passe ne correspondent pas");
+            return;
+        }
+
     }
 
     return (
@@ -36,8 +51,8 @@ const SignUp = () => {
                     <h2>Inscription</h2>
                 </div>
 
-                <div className='sign-up-body'>
-                    <form className='sign-up-form' onSubmit={handleSubmit}>
+                <form className='sign-up-form' onSubmit={handleSubmit}>
+                    <div className='sign-up-body'>
                         <div className="form-section">
                             <label htmlFor="signUpFirstName" className="form-label">Prénom ou Pseudo</label>
                             <input 
@@ -49,7 +64,7 @@ const SignUp = () => {
                                 required
                             />
                         </div>
-                        
+                    
                         <div className="form-section">
                             <label htmlFor="signUpEmail" className="form-label">Email</label>
                             <input 
@@ -84,15 +99,17 @@ const SignUp = () => {
                                 name="pwd"
                                 required
                             />
-                            {/* <p className="text-danger mt-1">{validation}</p> */}
                         </div>
+                        
+                        <p className="form-validation">{validation}</p>
 
-                        <div className="sign-up-footer">
-                            <button id="cancel-button" onClick={() => toggleModals("close")}>Annuler</button>
-                            <button>Confirmer</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    
+                    <div className="sign-up-footer">
+                        <button id="cancel-button" onClick={() => toggleModals("close")}>Annuler</button>
+                        <button>Confirmer</button>
+                    </div>
+                </form>
             </div>
         </div>
         )}

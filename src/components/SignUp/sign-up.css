@@ -25,7 +25,6 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-    margin-top: 10px;
 }
 
 .sign-up-close {
@@ -39,18 +38,22 @@
     cursor: pointer;
 }
 
-.sign-up-body {
-    flex: 50%;
+.sign-up-form {
+    flex: 1;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     text-align: center;
-}
-
-.sign-up-form {
-    display: flex;
-    flex-direction: column;
 }
 
 .form-section {
@@ -58,17 +61,23 @@
     grid-template-columns: repeat(2, 2fr);
     grid-gap: 1.2rem; 
     height: 25px;
-}
-.form-section:not(:last-child) {
     margin-bottom: 25px;
 }
 
+.form-label,
+.form-control {
+    width: 200px;
+}
 .form-control {
     height: 27px;
 }
 
+.form-validation {
+    color:crimson;
+    font-size: 12px;
+}
+
 .sign-up-footer {
-    flex: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
